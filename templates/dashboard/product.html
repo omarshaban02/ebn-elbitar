@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/product.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+sharp" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="shortcut icon" href="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}"/>
+
+    <title>Pharmacy-product</title>
+</head>
+
+<body onload="onload()">
+    <!-- Link js file -->
+    <script src="{% static 'js/index.js' %}"></script>
+    <form method="post"><input type="hidden" id="Id" name="Id" value= {{e}} ></form>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}">
+                    <h2>EBN<span class="danger">EL-BITAR</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-outlined">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="{%url 'dashboard' x=u.email %}">
+                    <span class="material-symbols-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="{%url 'customer' x=u.email %}">
+                    <span class="material-symbols-sharp">person</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="{%url 'order' x=u.email %}">
+                    <span class="material-symbols-sharp">receipt_long</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="{%url 'product' x=u.email %}">
+                    <span class="material-symbols-sharp">production_quantity_limits</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="{%url 'admin' x=u.email %}">
+                    <span class="material-symbols-sharp">shield_person</span>
+                    <h3>Admins</h3>
+                    <a href="{%url 'admin_login' %}">
+                        <span class="material-symbols-sharp">logout</span>
+                        <h3>Logout</h3>
+                    </a>
+            </div>
+        </aside>
+        <!-- -----------------------------------  END OF SIDE BAR  --------------------------------------- -->
+        <main>
+            <div class="top">
+                <div class="left">
+                    <h1>Products</h1>
+                </div>
+                <div class="top-icons">
+                    <button class="theme-toggler" onclick="myFunction()"><span
+                            class="material-symbols-sharp active">light_mode</span><span
+                            class="material-symbols-sharp">dark_mode</span></buttton>
+                </div>
+                <div class="right">
+                    <div class="profile">
+                        <div class="info">
+                            <p>Hey, <b>{{u.f_name}}</b></p>
+                            <small class="text-muted">Admin</small>
+                        </div>
+                        <div class="profile-photo">
+                            {% url 'profile'  x=u.email y=u.email as profile %}
+                            <img src="{% static '/image/R.png' %}" onclick="window.location.href='{{profile}}'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 2.5rem;">
+            </div>
+
+            <div class="recent-orders">
+                <h2>Products</h2>
+                <table>
+                    <thead class="table-header">
+                        <tr>
+                            <th>image</th>
+                            <th>Product Name</th>
+                            <th>Product ID</th>
+                            <th>Price</th>
+                            <th>Numbers</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-body">
+                        {% for x in product%}
+                        <tr>
+                            <th><img src={{x.image.url}}></th>
+                            <th>{{x.name}}</th>
+                            <th>{{x.id}}</th>
+                            <th>{{x.price}}</th>
+                            <th>{{x.quantity}}</th>
+                            <td class="primary"><a href="{%url 'show' x=u.email y=x.id %}">Details</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% url 'add'  x=u.email as add %}
+                <div><button type="submit" class="btn" onclick="window.location.href='{{add}}'"><span class="material-symbols-sharp">add</span></button></div>
+            </div>
+        </main>
+        <!---------------------- End of Main ------------------------->
+
+    </div>
+</body>
+
+</html>

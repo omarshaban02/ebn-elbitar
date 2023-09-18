@@ -1,0 +1,597 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="shortcut icon" href="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}"/>
+    <title>Product</title>
+
+    <style>
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 75px;
+            padding: 20px;
+            /* background-image: linear-gradient(to bottom, #162938 ,#1629387b ); */
+            /* background-color: #162938; */
+            background-color: transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            font-family: 'Lobster', cursive;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: left;
+            height: 200px;
+            margin-top: 0px;
+            margin-left: -30px;
+        }
+
+        .navigation a,
+        .dropdown-menu a {
+            position: relative;
+            font-size: 1.5em;
+            color: #2B3467;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 30px;
+            transition-duration: 0.3s;
+
+        }
+
+        .navigation a:hover,
+        .dropdown-menu a:hover {
+            top: 4px;
+            color: #2B3467;
+        }
+
+        .navigation a::after,
+        .dropdown-menu a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 2px;
+            width: 100%;
+            height: 2px;
+            background: #2B3467;
+            border-radius: 5px;
+            transform: scaleX(0);
+            transition: all .5s;
+        }
+
+        .navigation a:hover::after,
+        .dropdown-menu a:hover::after {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+
+        .navigation .btnLogin {
+            width: 85px;
+            height: 38px;
+            background: transparent;
+            border: 2px solid #2B3467;
+            outline: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #2B3467;
+            font-weight: 500;
+            margin-left: 30px;
+            margin-right: 30px;
+            /* margin-top:-5px; */
+            font-family: 'Times New Roman', Times, serif;
+            transition: scale 0.3s ease;
+        }
+
+        .navigation .btnLogin:hover {
+            color: white;
+            border-color: white;
+            background-color: #2B3467;
+            top: 5px;
+
+        }
+
+        .navigation .btnLogin:active,
+        .dropdown-menu .btnLogin:active {
+            scale: 0.95;
+        }
+
+        .navigation .toggle_btn {
+            position: relative;
+            color: #2B3467;
+            font-size: 2rem;
+            cursor: pointer;
+            margin-right: 15px;
+            margin-top: -8px;
+            display: none;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: fixed;
+            z-index: 99;
+            top: 75px;
+            height: 0;
+            width: 100%;
+            left: 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            overflow: hidden;
+            transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .dropdown-menu li {
+            margin-top: 20px;
+            padding: 1.2rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dropdown-menu .btnLogin {
+            position: absolute;
+            margin-top: 20px;
+            width: 220px;
+            height: 45px;
+            background: transparent;
+            border: 2px solid #2B3467;
+            outline: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.3em;
+            color: #2B3467;
+            justify-content: center;
+            font-weight: 500;
+            transition: scale 0.3s ease;
+        }
+
+        .dropdown-menu .btnLogin:hover {
+            color: white;
+            border-color: white;
+            background-color: #2B3467;
+        }
+
+        .dropdown-menu.open {
+            height: 100vh;
+        }
+
+        @media (max-width:870px) {
+
+            .navigation a,
+            .navigation .btnLogin {
+                display: none;
+            }
+
+            .navigation .toggle_btn {
+                display: block;
+            }
+
+            .dropdown-menu {
+                display: block;
+            }
+
+        }
+
+        body {
+            background-color:
+                /* #B9EDDD */
+                #EEEEEE
+                /* #C9EEFF; */
+                /* rgb(255 255 255 / 91%); */
+        }
+
+        .small-img-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .small-img-col {
+            flex-basis: 32%;
+            cursor: pointer;
+
+        }
+
+        .sproduct input {
+            width: 50px;
+            height: 40px;
+            padding-left: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .sproduct:focus {
+            outline: none;
+
+        }
+
+        /* related products */
+
+        .cat-img {
+            height: 280px;
+            transition: 0.35s;
+            -webkit-transition: 0.35s;
+            -moz-transition: 0.35s;
+            -ms-transition: 0.35s;
+            -o-transition: 0.35s;
+        }
+
+        .cat-img:hover {
+            transform: scale(1.2);
+            -webkit-transform: scale(1.2);
+            -moz-transform: scale(1.2);
+            -ms-transform: scale(1.2);
+            -o-transform: scale(1.2);
+            opacity: 0.8;
+        }
+
+        .card {
+            height: 550px;
+            border-radius: 30px;
+            -webkit-border-radius: 30px;
+            -moz-border-radius: 30px;
+            -ms-border-radius: 30px;
+            -o-border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: 7px 7px 10px rgba(132, 139, 200, .18)
+        }
+
+
+
+        /* footer style */
+
+        footer {
+            width: 100%;
+            background-color: #2B3467;
+            padding: 20px 20px;
+
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            color: white;
+        }
+
+
+
+
+        .footer-section {
+            width: 200px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            font-family: 'Lobster', cursive;
+            font-size: 22px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            text-transform: capitalize;
+            position: relative;
+        }
+
+        .footer-section h3::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 2px;
+            background-color: aliceblue;
+            border-radius: 5px;
+            transform-origin: right;
+            transform: scaleX(0);
+            transition: transform .3s;
+        }
+
+        .footer-section h3:hover::before {
+            transform-origin: left;
+            transform: scaleX(1);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li,
+        p {
+            margin-bottom: 5px;
+        }
+
+        ul li a,
+        p {
+            text-decoration: none;
+            color: white;
+            display: block;
+            transition: all 0.4s ease;
+        }
+
+        ul li a:hover {
+            /* border-left: 2px solid white; */
+            padding-left: 10px;
+            text-decoration: underline;
+
+        }
+
+        p:hover {
+            /* border-left: 2px solid white; */
+            padding-left: 10px;
+        }
+
+        .social-icons a {
+            color: white;
+            margin-right: 10px;
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            font-size: 30px;
+            color: #8FA9B4;
+        }
+
+        .footer-bottom {
+            margin: 0 -20px;
+            color: #162938;
+            background-color: #EEEEEE;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .rp-add {
+            font-size: 32px;
+            color: #0170ce;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .darkblue {
+            color: #2B3467;
+        }
+
+        .navigation a {
+            color: #2B3467 !important;
+        }
+
+        * {
+            font-family: poppins;
+        }
+        .imgRapper
+        {
+            height: 320px;
+            width: 100%;
+            overflow: hidden;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NavBar -->
+    <header>
+        {% url 'home' as home %}
+
+        <div class="logo"><img src="{% static 'image/green-logo.png' %}" onclick="window.location.href='{{home}}'">
+        </div>
+        <!-- <h2 class="logo">Pharmacy</h2> -->
+        <nav class="navigation">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'customerProducts' catg='all' %}">Products</a>
+            <a href="{% url 'aboutUs' %}">About US</a>
+            {% url 'login' as login %}
+            <button class="btnLogin" onclick=window.location.href="login">Login</button>
+            <span class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </span>
+        </nav>
+        <div class="dropdown-menu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'customerProducts' catg='all' %}">Products</a></li>
+            <li><a href="{% url 'aboutUs' %}">About US</a></li>
+            <li><button class="btnLogin" onclick="toLoginPage()">Login</button></li>
+        </div>
+    </header>
+
+    <!-- NavBar -->
+
+    <section class="container sproduct my-5 pt-5 ">
+
+        <div class="row mt-5 justify-content-between">
+            <div class="col-lg-5 col-md-12 col-12 ">
+                <img src="{{product.image.url}}" alt="" class="img-fluid w-100 pb-1" id="MainImg">
+
+                <div class="small-img-group">
+                    <div class="small-img-col">
+                        <img src="{{product.image.url}}" alt="" width="100%" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="{{product.image1.url}}" alt="" width="100%" class="small-img">
+                    </div>
+                    <div class="small-img-col">
+                        <img src="{{product.image2.url}}" alt="" width="100%"
+                            class="small-img">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-5 col-md-12 col-12">
+                <h6 class="py-4 darkblue" style="display: inline; opacity: 0.4;">Home/ </h6>
+
+                {% if product.category == "prescription medications"%}
+                <h6 class="py-4 darkblue" style="display: inline;opacity: 0.4;">Prescription Medications</h6>
+                {% elif product.category == "non-prescription medications"%}
+                <h6 class="py-4 darkblue" style="display: inline;opacity: 0.4;">Non-Prescription Medications</h6>
+                {% elif product.category == "beauty & cosmetics"%}
+                <h6 class="py-4 darkblue" style="display: inline;opacity: 0.4;">Beauty Products</h6>
+                {% elif product.category == "medical supplies"%}
+                <h6 class="py-4 darkblue" style="display: inline;opacity: 0.4;">Medical Supplies</h6>
+                {% elif product.category == "baby and childcare"%}
+                <h6 class="py-4 darkblue" style="display: inline;opacity: 0.4;">Baby Products</h6>
+                {% endif %}
+
+                <h1></h1>
+                <h3 class="py-4 darkblue " style="display: inline;">{{product.company_name}} | </h3>
+                <h3 class="py-4 darkblue" style="display: inline;">{{product.name}}</h3>
+                <h2 class="my-4 darkblue">EGP {{product.price}}</h2>
+                <input type="number" value="1">
+                <!--  -->
+
+                <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Add to Cart</button>
+
+                <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop"
+                    aria-labelledby="offcanvasTopLabel">
+                    <div class="offcanvas-header">
+                        <h3 class="offcanvas-title text-center" id="offcanvasTopLabel">Successful Addtion</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body justify-content">
+                        <h4 class="text-center">
+                            {{product.name}} added to your cart
+                        </h4>
+                        {% url 'cart' as cart %}
+                        <button type="button" class="btn btn-outline-secondary text-center" data-bs-dismiss="offcanvas"
+                            onclick="window.location.href='{{cart}}'">Go to Cart</button>
+                    </div>
+                </div>
+                <!--  -->
+                <h4 class="darkblue">Description</h4>
+                <span class="darkblue">{{product.description}}</span>
+
+            </div>
+
+        </div>
+
+        <!-- {% url 'cart' as cart %}
+        <button type="button" class="btn btn-outline-dark" style="transform: translateY(-3px);" id="addtocart"
+            onclick="window.location.href='{{cart}}'">Add To Cart</button> -->
+
+    </section>
+
+
+    <section class="my-5 py-5">
+
+        <p class="mx-outo rp-add darkblue mb-5">Related Products</p>
+
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 ">
+                {% for pro in related_product %}
+                <div class="col">
+                    <div class="card" style="height: 380px; ">
+<div class="imgRapper">
+    <img src="{{pro.image.url}}" class="card-img-top cat-img">
+
+</div>
+                        <div class="card-body">
+                            <h4 class="card-title darkblue">{{pro.name}}</h4>
+                            <p class="card-text fs-32 darkblue">EGP {{pro.price}}</p>
+                            <a href="{% url 'product' product_id=pro.id %}">
+                                <button type="button" class="btn btn-outline-dark">Explore</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <script>
+        var MainImg = document.getElementById('MainImg');
+        var smallimg = document.getElementsByClassName('small-img');
+
+        smallimg[0].onclick = function () {
+            MainImg.src = smallimg[0].src;
+        }
+
+        smallimg[1].onclick = function () {
+            MainImg.src = smallimg[1].src;
+        }
+
+        smallimg[2].onclick = function () {
+            MainImg.src = smallimg[2].src;
+        }
+
+    </script>
+
+    <script>
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document.querySelector('.toggle_btn i')
+        const dropDownMenu = document.querySelector('.dropdown-menu')
+
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open');
+            const isOpen = dropDownMenu.classList.contains('open')
+
+            toggleBtnIcon.classList = isOpen
+                ? "fa-solid fa-xmark"
+                : "fa-solid fa-bars"
+
+        }
+    </script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+</body>
+
+<!-- Footer -->
+<footer class="mt-5">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>123 Main Street</p>
+            <p>City, State 12345</p>
+            <p>Phone: 123-456-7890</p>
+            <p>Email: info@pharmacy.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'customerProducts' catg='all' %}">Products</a></li>
+                <li><a href="{% url 'aboutUs' %}">About Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2023 Pharmacy. All rights reserved.</span>
+    </div>
+</footer>
+
+
+</html>

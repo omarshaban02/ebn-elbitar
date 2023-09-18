@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>  
+    <link rel="stylesheet" href="charts.css">
+<script>
+window.onload = function () {
+	var dataPoints = [
+		{ y: 450 },
+		{ y: 414},
+		{ y: 520 },
+		{ y: 600 },
+		{ y: 450 },
+		{ y: 350 },
+		{ y: 480 },
+		{ y: 480 },
+		{ y: 410 },
+		{ y: 500 },
+		{ y: 480 },
+		{ y: 510 }
+	];
+
+	var highestValue = -Infinity;
+	var lowestValue = Infinity;
+	var highestIndex = -1;
+	var lowestIndex = -1;
+
+	for (var i = 0; i < dataPoints.length; i++) {
+		if (dataPoints[i].y > highestValue) {
+			highestValue = dataPoints[i].y;
+			highestIndex = i;
+		}
+		if (dataPoints[i].y < lowestValue) {
+			lowestValue = dataPoints[i].y;
+			lowestIndex = i;
+		}
+	}
+
+	var chart = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+		theme: "light2",
+		title:{
+			text: "income"
+		},
+		data: [{        
+			type: "line",
+	      	indexLabelFontSize: 16,
+			dataPoints: dataPoints
+		}]
+	});
+
+	if (highestIndex !== -1) {
+		dataPoints[highestIndex].indexLabel = "\u2191 highest";
+		dataPoints[highestIndex].markerColor = "red";
+		dataPoints[highestIndex].markerType = "triangle";
+	}
+
+	if (lowestIndex !== -1) {
+		dataPoints[lowestIndex].indexLabel = "\u2193 lowest";
+		dataPoints[lowestIndex].markerColor = "DarkSlateGrey";
+		dataPoints[lowestIndex].markerType = "cross";
+	}
+
+	chart.render();
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+<script src="https://cdn.canvasjs.com/ga/canvasjs.min.js"></script>
+<script src="https://cdn.canvasjs.com/ga/canvasjs.stock.min.js"></script>
+</body>
+
+</html>

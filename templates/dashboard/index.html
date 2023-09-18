@@ -1,0 +1,257 @@
+{% load static %}
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/charts.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+sharp" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="shortcut icon" href="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}"/>
+    <title>Pharmacy-dashboard</title>
+</head>
+
+<body onload="onload()">
+    <!-- Link js file -->
+    <script src="{% static 'js/index.js' %}"></script>
+    <form method="post"><input type="hidden" id="Id" name="Id" value= {{e}} ></form>
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}">
+                    <h2>EBN-<span class="danger">ELBetar</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-outlined">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="{%url 'dashboard' x=u.email %}">
+                    <span class="material-symbols-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="{%url 'customer' x=u.email %}">
+                    <span class="material-symbols-sharp">person</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="{%url 'order' x=u.email %}">
+                    <span class="material-symbols-sharp">receipt_long</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="{%url 'product' x=u.email%}">
+                    <span class="material-symbols-sharp">production_quantity_limits</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="{%url 'admin' x=u.email %}">
+                    <span class="material-symbols-sharp">shield_person</span>
+                    <h3>Admins</h3>
+                </a> 
+                <a href="{%url 'admin_login' %}">
+                    <span class="material-symbols-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <!-- -----------------------------------  END OF SIDE BAR  --------------------------------------- -->
+            <main>
+                <div class="top">
+                    <div class="left"><h1>Dashboard</h1></div>
+                    <div class="top-icons">
+                        <!-- <button id="menu-btn"><span class="material-symbols-sharp">menu</span></button> -->
+                        <button class="theme-toggler" onclick="myFunction()"><span class="material-symbols-sharp active">light_mode</span><span class="material-symbols-sharp">dark_mode</span></buttton>
+                    </div>
+                    <div class="right">
+                        <div class="profile">
+                            <div class="info">
+                                <p>Hey, <b>{{u.f_name}}</b></p>
+                                <small class="text-muted">Admin</small>
+                            </div>
+                            <div class="profile-photo">
+                                {% url 'profile'  x=u.email y=u.email as profile %}
+                            <img src="{% static '/image/R.png' %}" onclick="window.location.href='{{profile}}'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 2.5rem;">
+            </div>
+                <div class="insights">
+                    <div class="sales">
+                        <span class="material-symbols-sharp">analytics</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Total Customers</h3>
+                                <div>{{n_cust}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="expenses">
+                        <span class="material-symbols-sharp">analytics</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Total Orders</h3>
+                                <div >{{total_ord}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+    
+                    <div class="income">
+                        <span class="material-symbols-sharp">stacked_line_chart</span>
+                        <div class="middle">
+                            <div class="left">
+                                <h3>Total Income</h3>
+                                <div class="h-3">{{total_in}} LE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                
+        {% comment %} chart {% endcomment %}
+<div class="align-div">
+    <div class="chart">
+        <script>
+            window.onload = function () {
+                var dataPoints = [
+                    { y: 450 },
+                    { y: 414},
+                    { y: 520 },
+                    { y: 600 },
+                    { y: 450 },
+                    { y: 350 },
+                    { y: 480 },
+                    { y: 480 },
+                    { y: 410 },
+                    { y: 500 },
+                    { y: 480 },
+                    { y: 510 }
+                ];
+            
+                var highestValue = -Infinity;
+                var lowestValue = Infinity;
+                var highestIndex = -1;
+                var lowestIndex = -1;
+            
+                for (var i = 0; i < dataPoints.length; i++) {
+                    if (dataPoints[i].y > highestValue) {
+                        highestValue = dataPoints[i].y;
+                        highestIndex = i;
+                    }
+                    if (dataPoints[i].y < lowestValue) {
+                        lowestValue = dataPoints[i].y;
+                        lowestIndex = i;
+                    }
+                }
+            
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    theme: "light2",
+                    title:{
+                        text: "income"
+                    },
+                    data: [{        
+                        type: "line",
+                          indexLabelFontSize: 16,
+                        dataPoints: dataPoints
+                    }]
+                });
+            
+                if (highestIndex !== -1) {
+                    dataPoints[highestIndex].indexLabel = "\u2191 highest";
+                    dataPoints[highestIndex].markerColor = "red";
+                    dataPoints[highestIndex].markerType = "triangle";
+                }
+            
+                if (lowestIndex !== -1) {
+                    dataPoints[lowestIndex].indexLabel = "\u2193 lowest";
+                    dataPoints[lowestIndex].markerColor = "DarkSlateGrey";
+                    dataPoints[lowestIndex].markerType = "cross";
+                }
+            
+                chart.render();
+            }
+        </script>
+            <div id="chartContainer" style="height: 370px; width: 1000px;   margin-right: 50px; "></div>
+            <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+            <script src="https://cdn.canvasjs.com/ga/canvasjs.min.js"></script>
+            <script src="https://cdn.canvasjs.com/ga/canvasjs.stock.min.js"></script>
+            
+     </div>
+</div>
+
+         {% comment %} chart end {% endcomment %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="recent-orders">
+                <h2>Recent order</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order Number</th>
+                            <th>Customer</th>
+                            <th>Order date</th>
+                            <th>Order Price</th>
+                            <th>Status</th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in order%}
+                        <tr>
+                            <th>{{x.id}}</th>
+                            <th>{{x.customer_email}}</th>
+                            <th>{{x.order_date}}</th>
+                            <th>{{x.order_total_price}}</th>
+                            <th>{{x.order_state}}</th>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="{%url 'order' x=u.email %}">Show All</a>
+            </div>
+        </main>
+
+    </div>
+</body>
+
+</html>

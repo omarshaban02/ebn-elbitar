@@ -1,0 +1,554 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About us</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="shortcut icon" href="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}"/>
+
+</head>
+<style>
+    /* footer style */
+
+    footer {
+        width: 100%;
+        background-color: #2B3467;
+        padding: 20px 20px;
+
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        color: white;
+    }
+
+
+
+
+    .footer-section {
+        width: 200px;
+        margin-bottom: 20px;
+    }
+
+    .footer-section h3 {
+        font-family: 'Lobster', cursive;
+        font-size: 22px;
+        font-weight: 400;
+        margin-bottom: 10px;
+        text-transform: capitalize;
+        position: relative;
+    }
+
+    .footer-section h3::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        width: 100%;
+        height: 2px;
+        background-color: aliceblue;
+        border-radius: 5px;
+        transform-origin: right;
+        transform: scaleX(0);
+        transition: transform .3s;
+    }
+
+    .footer-section h3:hover::before {
+        transform-origin: left;
+        transform: scaleX(1);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul li p {
+        margin-bottom: 5px;
+    }
+
+    ul li a,
+    p {
+        text-decoration: none;
+        color: white;
+        display: block;
+        transition: all 0.4s ease;
+    }
+
+    ul li a:hover {
+        /* border-left: 2px solid white; */
+        padding-left: 10px;
+        text-decoration: underline;
+
+    }
+
+    footer p:hover {
+        /* border-left: 2px solid white; */
+        padding-left: 10px;
+    }
+
+    .social-icons a {
+        color: white;
+        margin-right: 10px;
+        font-size: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+        font-size: 30px;
+        color: #8FA9B4;
+    }
+
+    .footer-bottom {
+        margin: 0 -20px;
+        color: #162938;
+        background-color: #EEEEEE;
+        padding: 10px 0;
+        text-align: center;
+        font-size: 16px;
+    }
+
+
+
+
+    /* navbar style */
+    header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 75px;
+        padding: 20px;
+        background-color: transparent;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 100;
+        font-family: 'Lobster', cursive;
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center;
+        height: 200px;
+        margin-top: 0px;
+        margin-left: -30px;
+    }
+
+    .navigation a,
+    .dropdown-menu a {
+        position: relative;
+        font-size: 1.5em;
+        color: #2B3467;
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 30px;
+        transition-duration: 0.3s;
+
+    }
+
+    .navigation a:hover,
+    .dropdown-menu a:hover {
+        top: 4px;
+        color: #2B3467;
+    }
+
+    .navigation a::after,
+    .dropdown-menu a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 2px;
+        width: 100%;
+        height: 2px;
+        background: #2B3467;
+        border-radius: 5px;
+        transform: scaleX(0);
+        transition: all .5s;
+    }
+
+    .navigation a:hover::after,
+    .dropdown-menu a:hover::after {
+        transform-origin: left;
+        transform: scaleX(1);
+    }
+
+    .navigation .btnLogin {
+        width: 85px;
+        height: 38px;
+        background: transparent;
+        border: 2px solid #2B3467;
+        outline: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.5em;
+        color: #2B3467;
+        font-weight: 500;
+        margin-left: 30px;
+        margin-right: 30px;
+        /* margin-top:-5px; */
+        font-family: 'Times New Roman', Times, serif;
+        transition: scale 0.3s ease;
+    }
+
+    .navigation .btnLogin:hover {
+        color: white;
+        border-color: white;
+        background-color: #2B3467;
+        top: 5px;
+
+    }
+
+    .navigation .btnLogin:active,
+    .dropdown-menu .btnLogin:active {
+        scale: 0.95;
+    }
+
+    .navigation .toggle_btn {
+        position: relative;
+        color: #2B3467;
+        font-size: 2rem;
+        cursor: pointer;
+        margin-right: 15px;
+        margin-top: -8px;
+        display: none;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: fixed;
+        z-index: 99;
+        top: 75px;
+        height: 0;
+        width: 100%;
+        left: 0;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(15px);
+        overflow: hidden;
+        transition: height 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .dropdown-menu li {
+        margin-top: 20px;
+        padding: 1.2rem;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dropdown-menu .btnLogin {
+        position: absolute;
+        margin-top: 20px;
+        width: 220px;
+        height: 45px;
+        background: transparent;
+        border: 2px solid #2B3467;
+        outline: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.3em;
+        color: #2B3467;
+        justify-content: center;
+        font-weight: 500;
+        transition: scale 0.3s ease;
+    }
+
+    .dropdown-menu .btnLogin:hover {
+        color: white;
+        border-color: white;
+        background-color: #2B3467;
+    }
+
+    .dropdown-menu.open {
+        height: 100vh;
+    }
+
+    @media (max-width:870px) {
+
+        .navigation a,
+        .navigation .btnLogin {
+            display: none;
+        }
+
+        .navigation .toggle_btn {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: block;
+        }
+
+    }
+
+    body {
+        /* background-size: cover;
+    background-image: url("./imgs/bg/7.jpg");
+    background-repeat: no-repeat;
+    height: 100vh;
+     */
+
+        background-color: #EEEEEE;
+    }
+
+    .padding {
+        padding-top: 10px;
+        position: relative;
+        width: 100%;
+        height: 200px;
+        padding: 40px;
+        display: flex;
+        margin-bottom: 15px;
+        background: linear-gradient(to bottom, #0a9fe4dc, #EEEEEE);
+
+        /* background-color: #c9eeffdc; */
+        /*rgb(232,244,246):;
+    */
+        direction: ltr;
+
+    }
+
+    .card-text {
+        color: #2B3467;
+    }
+
+    .card-title {
+        font-weight: bold;
+        color: #272f5d;
+    }
+
+    .card {
+        transition: .4s;
+        margin-left: 20px;
+        margin-right: 20px;
+
+    }
+
+    .card:hover {
+        transform: scale(1.1);
+    }
+</style>
+
+
+
+<body>
+    <!-- NavBar -->
+    <header>
+        {% url 'home' as home %}
+        
+        <div class="logo"><img src="{% static 'image/green-logo.png' %}" onclick="window.location.href='{{home}}'" ></div>
+        <div class="logo"><img src="./imgs/logo/light-mode.png"></div>
+        <nav class="navigation">
+            <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'customerProducts' catg='all' %}">Products</a>
+      <a href="{% url 'aboutUs' %}">About US</a>
+
+      {% url 'login' as login %}
+            <button class="btnLogin" onclick=window.location.href="login">Login</button>
+      <span class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </span>
+        </nav>
+        <div class="dropdown-menu">
+            <li><a href="{% url 'home'%}">Home</a></li>
+            <li><a href="{% url 'customerProducts' catg='all'  %}">Products</a></li>
+            <li><a href="{% url 'aboutUs'%}">About US</a></li>
+            <li><button class="btnLogin" onclick="toLoginPage()">Login</button></li>
+        </div>
+    </header>
+
+
+
+    <div class="padding"></div>
+    <!-- <button class="btn btn-dark mx-3" onclick="toLoginPage()">Login</button> -->
+    <!-- <li><button type="button" class="btn btn-dark" onclick="toLoginPage()">Login</button></li> -->
+
+    <!-- NavBar -->
+
+    <div>
+        {% url 'home' as home %}
+        
+        <div class="logo" style="height: 400px; transform: translateY(-150px);"><img src="{% static 'image/green-logo.png' %}" ></div>
+    </div>
+
+
+    <div class="container" style="transform: translateY(-180px);">
+        <div class="row row-cols-1 row-cols-md-2 g-5 ">
+            <div class="col">
+                <div class="card border-secondary mb-3">
+                    <!-- <div class="card-header">Header</div> -->
+                    <div class="card-body text-secondary">
+                        <h5 class="card-title">Our Mission</h5>
+                        <p class="card-text">At Ebn-Elbitar Pharmacy Shop, our mission is to offer a comprehensive range
+                            of
+                            pharmaceutical products and services to meet the diverse needs of our customers. We aim to
+                            provide a seamless online shopping experience that combines convenience, affordability, and
+                            top-notch customer support. With a focus on your health and satisfaction, we are dedicated
+                            to
+                            being your go-to pharmacy shop for all your medical requirements.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card border-secondary mb-3">
+                    <!-- <div class="card-header">Header</div> -->
+                    <div class="card-body text-secondary">
+                        <h5 class="card-title">Quality Products</h5>
+                        <p class="card-text">We understand the importance of genuine and safe pharmaceutical
+                            products in
+                            maintaining your well-being. That's why we partner with trusted manufacturers and
+                            distributors to source only high-quality medications, health supplements, and personal
+                            care
+                            items. Rest assured that each product available on our e-shop undergoes strict quality
+                            control measures to ensure its effectiveness and safety.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card border-secondary mb-3">
+                    <!-- <div class="card-header">Header</div> -->
+                    <div class="card-body text-secondary">
+                        <h5 class="card-title">Wide Selection</h5>
+                        <p class="card-text">At Ebn-Elbitar Pharmacy Shop, we take pride in offering an extensive
+                            range
+                            of products to cater to your diverse health needs. From prescription medications to
+                            over-the-counter drugs, vitamins, beauty and skincare products, herbal remedies, and
+                            more,
+                            we strive to provide a comprehensive selection to support your health and lifestyle
+                            choices.
+                            Explore our user-friendly website to discover a wide array of products conveniently
+                            categorized for easy browsing and purchasing.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="card border-secondary mb-3">
+                    <!-- <div class="card-header">Header</div> -->
+                    <div class="card-body text-secondary">
+                        <h5 class="card-title">Secure and Convenient Shopping</h5>
+                        <p class="card-text">Your safety and privacy are our utmost priorities. Our e-shop
+                            incorporates
+                            robust security measures to ensure that your personal and payment information is
+                            protected
+                            at all times. We use encryption technology and adhere to strict privacy policies to
+                            safeguard your data. Additionally, our website is designed with a user-friendly
+                            interface,
+                            making it easy for you to navigate, search for products, and place orders with just a
+                            few
+                            clicks. Enjoy the convenience of shopping from the comfort of your home, 24/7.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="card border-secondary mb-3">
+                    <!-- <div class="card-header">Header</div> -->
+                    <div class="card-body text-secondary">
+                        <h5 class="card-title">Expert Guidance</h5>
+                        <p class="card-text">At Ebn-Elbitar Pharmacy Shop, we believe in providing personalized
+                            support
+                            and guidance to our customers. Our team of knowledgeable pharmacists is available to
+                            address
+                            your queries, provide expert advice, and offer medication counseling when needed. We are
+                            committed to ensuring that you have the information necessary to make informed decisions
+                            about your health and wellness.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="card border-secondary mb-3">
+                    <!-- <div class="card-header">Header</div> -->
+                    <div class="card-body text-secondary">
+                        <h5 class="card-title">Fast and Reliable Delivery</h5>
+                        <p class="card-text">We understand the importance of receiving your medications and
+                            healthcare
+                            products in a timely manner. Our efficient order processing and logistics ensure that
+                            your
+                            packages are dispatched promptly. We partner with reliable shipping providers to deliver
+                            your orders accurately and securely, right to your doorstep. Experience hassle-free
+                            delivery
+                            with real-time tracking updates for added convenience and peace of mind.</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script>
+        const toggleBtn = document.querySelector('.toggle_btn')
+        const toggleBtnIcon = document.querySelector('.toggle_btn i')
+        const dropDownMenu = document.querySelector('.dropdown-menu')
+
+        toggleBtn.onclick = function () {
+            dropDownMenu.classList.toggle('open');
+            const isOpen = dropDownMenu.classList.contains('open')
+
+            toggleBtnIcon.classList = isOpen
+                ? "fa-solid fa-xmark"
+                : "fa-solid fa-bars"
+
+        }
+    </script>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.js' %}"></script>
+
+</body>
+<!-- Footer -->
+<footer class="mt-5">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>123 Main Street</p>
+            <p>City, State 12345</p>
+            <p>Phone: 123-456-7890</p>
+            <p>Email: info@pharmacy.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="customerProducts.html">Products</a></li>
+                <li><a href="aboutUs.html">About us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p style="color: #162938;">&copy; 2023 Pharmacy. All rights reserved.</p>
+    </div>
+</footer>
+
+</html>

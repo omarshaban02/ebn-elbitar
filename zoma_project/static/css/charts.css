@@ -1,0 +1,28 @@
+main .chart {
+  position: relative;
+  width: 500px;
+  padding: 50px;
+  display:block;
+  /* grid-template-columns: 1fr 2fr;
+   grid-gap: 30px; */
+  min-height: 200px;
+}
+
+.align-div{
+  /* position: absolute; */
+  margin-right: 20px;
+  display: flex;
+  flex-direction: row;
+  width: 500px;
+  translate: 50px 0px;
+
+}
+
+@media (max-width: 991px) {
+  .chart {
+    /* grid-template-columns: 1fr; */
+    height: auto;
+    flex: 1;
+  }
+}
+

@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/admin-login&register.css' %}">
+    <link rel="shortcut icon" href="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}"/>
+    <title>Document</title>
+</head>
+
+
+
+<body>
+<!-- login -->
+
+    <div class="wrapper">
+        <span class="icon-closed" onclick="toLoginPage()"><ion-icon name="close-outline"></ion-icon></span>
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required name="email">
+                    <label>Email</label>
+                    
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required name="password">
+                    <label>Password</label>
+                   
+                </div>
+                <div class="remember-forget">
+                    <label><input type="checkbox">Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <div class="label-error">
+                    <label>{{error}}</label>
+                </div>
+                <button type="submit" class="btn" name="login" value="login">Login
+                </button>
+                <div class="login-register">
+                    <p>Don't have an account? <a href="#" class="register-link" >Register</a></p>
+                    <input type="hidden" id="Id" name="Id" value= {{e}} >
+                </div>
+            </form>
+        </div>
+
+<!-- register -->
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="name">
+                    <div class="input-box fname">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" required name="First Name">
+                        <label>First Name</label>   
+                    </div>
+                    <div class="input-box mname">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                            <input type="text" required name="Middle Name">
+                            <label>Middel Name</label>  
+                    </div>
+                    <div class="input-box lname">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                            <input type="text" required name="Last Name">
+                            <label>Last Name</label>  
+                    </div>
+            </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" required name="Email">
+                    <label>Email</label>         
+                </div>
+
+                <div class="label-gender-date">
+                    <label class="label-gender">Gender</label>
+                    <label class="label-date">Date</label>
+                </div>
+
+                <div class="gender-date">
+                    <span>                         
+                        <label class="male"><input type="radio" value="Male" name="Gender">Male</label>
+                        <label><input type="radio" value="Female" name="Gender">Female</label>
+                    </span>
+                    <input type="date" name="Date">
+                    <span class="date-icon"><ion-icon name="calendar-number"></ion-icon></ion-icon></span>
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required name="Password2" minlength="8" maxlength="20">
+                    <label>Password</label>  
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="call"></ion-icon></span>
+                    <input type="tel" required name="Phone" pattern="[0]{1}[1]{1}[0-9]{9}" >
+                    <label>Phone</label>           
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><i class="fa-solid fa-id-card"></i></ion-icon></span>
+                    <input type="tel" required name="SSN" pattern="\d{14}">
+                    <label>SSN</label>    
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><i class="fa-solid fa-id-card"></i></ion-icon></span>
+                    <input type="tel" name = "ESN" required pattern="\d{8}">
+                    <label>ESN</label>    
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="home"></ion-icon></i></ion-icon></span>
+                    <input type="text" name="Address" required>
+                    <label>address</label>    
+                </div>
+                    
+                <div class="temrs-conditions">
+                    <label><input type="checkbox" name="Agreement">I agree to the terms & conditions</label>
+                   <span></span>
+                </div>
+
+                <div class="label-error">
+                    <label>{{error2}}</label>
+                </div>
+
+                <button type="submit" class="btn" name="register" value="register">Register</button>
+                
+                <div class="login-register">
+                    <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js\admin-login&register.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+
+
+</html>

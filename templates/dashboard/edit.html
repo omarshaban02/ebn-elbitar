@@ -1,0 +1,221 @@
+{%load static%}
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/edit.css'%}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+sharp" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="shortcut icon" href="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}"/>
+    <title>Pharmacy-Update-Product</title>
+</head>
+
+<body onload="onload()">
+    <!-- Link js file -->
+    <script src="{%static 'js/index.js'%}"></script>
+
+    <div class="container">
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <img src="{% static '/image/logo.png' %}">
+                    <h2>EBN<span class="danger">EL-BITAR</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-symbols-outlined">close</span>
+                </div>
+            </div>
+            <div class="sidebar">
+                <a href="{%url 'dashboard' x=u.email %}">
+                    <span class="material-symbols-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <a href="{%url 'customer' x=u.email %}">
+                    <span class="material-symbols-sharp">person</span>
+                    <h3>Customers</h3>
+                </a>
+                <a href="{%url 'order' x=u.email %}">
+                    <span class="material-symbols-sharp">receipt_long</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="{%url 'product' x=u.email %}">
+                    <span class="material-symbols-sharp">production_quantity_limits</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="{%url 'admin' x=u.email %}">
+                    <span class="material-symbols-sharp">shield_person</span>
+                    <h3>Admins</h3> 
+                <a href="{%url 'admin_login' %}">
+                    <span class="material-symbols-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+        <!-- -----------------------------------  END OF SIDE BAR  --------------------------------------- -->
+        <main>
+            <div class="top">
+                <div class="left"><h1>Update Product</h1></div>
+                <div class="top-icons">
+                    <button class="theme-toggler" onclick="myFunction()"><span class="material-symbols-sharp active">light_mode</span><span class="material-symbols-sharp">dark_mode</span></buttton>
+                </div>
+                <div class="right">
+                    <div class="profile">
+                        <div class="info">
+                            <p>Hey, <b>{{u.f_name}}</b></p>
+                            <small class="text-muted">Admin</small>
+                        </div>
+                        <div class="profile-photo">
+                            <img src="{% static '/image/R.png' %}" onclick="window.location.href='{{profile}}'">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 2.5rem;">
+            </div>
+            <div class="insights">
+                <div class="sales">
+                    <div class="wrapper">
+                        <div class="form-box register">
+                            <!-- <h2>Add Product</h2> -->
+                            <form action="#" method="post">
+                                {% csrf_token %}
+                                <div class="align">
+                                    <div class="input-box falign">
+                                        <span class="icon"><i class="fa-solid fa-capsules"></i></ion-icon></span>
+                                        <input type="text" value={{p.name}} required name="p_name">
+                                        <label>Product Name</label>   
+                                    </div>
+                                    <div class="input-box lalign">
+                                        <span class="icon"><i class="fa-solid fa-building"></i></span>
+                                            <input type="text" value={{p.company_name}} required name="p_co_name">
+                                            <label>Company Name</label>  
+                                    </div>
+                                    <div class="input-box prodect_id ">
+                                        <span class="icon"><i class="fa-regular fa-id-card"></i></span>
+                                            <input type="tel" value={{p.id}} required readonly name="pid">
+                                            <label>ID</label>  
+                                    </div>
+                                </div>
+
+                                <div class="align date-row">
+                                    <div class="input-box falign ">
+                                        <input type="date" value="{{p.manufacture_date|date:'Y-m-d'}}" required name="p_manfacture">
+                                        <label >Manufacture Date</label>   
+                                    </div>
+                                    <div class="input-box lalign">
+                                            <input type="date" value="{{p.expired_date|date:'Y-m-d'}}" required name="p_expired">
+                                            <label>Expired Date</label>  
+                                    </div>
+                                    <div class="input-box ">
+                                            <input type="date" value="{{p.supply_date|date:'Y-m-d'}}" required name="p_supply">
+                                            <label>Supply Date</label>  
+                                    </div>
+                                </div>
+
+                                <div class="align">
+                                    <div class="input-box falign">
+                                        <span class="icon"><i class="fa-solid fa-sterling-sign"></i></span>
+                                            <input type="tel" value={{p.price}} required name="p_price">
+                                            <label>Price</label>  
+                                    </div>
+                                    <div class="input-box lalign">
+                                        <span class="icon"><i class="fa-solid fa-circle-plus"></i></i></span>
+                                            <input type="tel" value={{p.quantity}} required name="p_quantity">
+                                            <label>Quantity</label>  
+                                    </div>
+                                </div>
+                                    <div class="input-box">
+                                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                                        <input type="text" value={{p.supplier_name}} required name="p_supplier">
+                                        <label>Supplier Name</label>   
+                                </div>
+
+                                <div class="label-gender-date">
+                                    <label class="label-gender">Choose the category: </label>       
+                                        <select id="choices"  name="choices">
+                                          <option value="prescription medications">prescription medications</option>
+                                          <option value="non-prescription medications">non-prescription medications</option>
+                                          <option value="beauty & cosmetics">beauty & cosmetics</option>
+                                          <option value="medical supplies">medical supplies</option>
+                                          <option value="baby and childcare prodects">baby and childcare prodects</option>
+                                        </select>     
+                                </div> 
+                                <div class="input-box description">         
+                                    <textarea  placeholder="Description:" name="description" rows="4" cols="50">{{p.description}}</textarea>
+                                    
+                                </div>                                       
+                                <button type="submit" class="btn" name="submit" value="submit">submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="sales">
+                    <div class="product-photo">
+                        <div class="card">
+                            <h3>Image 1</h3>
+                            <img src={{p.image.url}} id="profile-pic">
+                            <!-- <label for="input-file"><h5>Update image</h5></label> -->
+                            <!-- <input type="file" accept="image/jpeg, image.png, image.jpg" id="input-file"> -->
+                        </div>
+                    </div>
+                    <div class="product-photo">
+                        <div class="card">
+                            <h3>Image 2</h3>
+                            <img src={{p.image1.url}} id="profile-pic-2">
+                            <!-- <label for="input-file-2"><h5>Update image</h5></label> -->
+                            <!-- <input type="file" accept="image/jpeg, image.png, image.jpg" id="input-file-2"> -->
+                        </div>
+                    </div>
+                    <div class="product-photo">
+                        <div class="card">
+                            <h3>Image 3</h3>
+                            <img src={{p.image2.url}} id="profile-pic-3">
+                            <!-- <label for="input-file-2"><h5>Update image</h5></label> -->
+                            <!-- <input type="file" accept="image/jpeg, image.png, image.jpg" id="input-file-2"> -->
+                        </div>
+                    </div> 
+                </div>
+
+            </div>
+   
+        </main>
+<script>
+
+
+let profilePic = document.getElementById("profile-pic")
+let inputFile = document.getElementById("input-file")
+inputFile.onchange=function(){
+    profilePic.src=URL.createObjectURL(inputFile.files[0])
+}
+
+
+let profilePic2 = document.getElementById("profile-pic-2")
+let inputFile2 = document.getElementById("input-file-2")
+inputFile2.onchange=function(){
+    profilePic2.src=URL.createObjectURL(inputFile2.files[0])
+}
+
+
+let profilePic3 = document.getElementById("profile-pic-3")
+let inputFile3 = document.getElementById("input-file-3")
+inputFile3.onchange=function(){
+    profilePic3.src=URL.createObjectURL(inputFile3.files[0])
+}
+
+
+</script>
+
+    </div>
+</body>
+
+</html>

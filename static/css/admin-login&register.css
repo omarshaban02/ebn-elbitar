@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    
+} 
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;  
+    background-color: #f6f6f9ec; 
+    font-family: 'Poppins', sans-serif;
+}
+
+
+.form{
+    padding-left: 20px;
+}
+
+.wrapper{
+    position:flex;
+    width:393px;
+    height:410px; 
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius:20px;
+    backdrop-filter: blur(20px);
+    box-shadow:1rem 2rem 3rem rgba(132, 139, 200, 0.265);
+    overflow: hidden;
+    transition: all 0.8s ease;
+    /* transform: scale(1); */
+}
+.wrapper:hover{
+    box-shadow: 1rem 2rem 3rem rgba(69, 73, 105, 0.354);;
+}
+
+.wrapper .form-box{
+    width: 100%;
+    padding: 30px;
+}
+
+.wrapper.active-register{
+    margin-top: 80px; 
+    margin-bottom: 20px;
+    height: 760px;
+    width:450px;
+}
+
+.wrapper .form-box.login{
+    transition: transform 0.8s ease;
+    transform: translateX(0);
+}
+.wrapper.active-register .form-box.login{
+    position: absolute;
+    transition: none;
+    transform: translateX(-500px);
+}
+.wrapper .form-box.register{
+    position: absolute;
+    transform:scale(0);
+    transform: translateX(500px);  
+     
+}
+.wrapper.active-register .form-box.register{
+    transition: transform 0.8s ease;
+    transform:scale(1);
+    transform: translateX(0);  
+}
+
+
+
+
+
+.wrapper .icon-closed{
+    position:absolute;
+    top:0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    background-color: #363949ec;
+    font-size: 2em;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:0 20px 0 20px ;
+    z-index: 1;
+}
+
+
+.form-box h2{
+    margin-top: -5px;
+    font-size: 2em;
+    text-align: center;
+    color: #363949ec;
+    
+}
+.name{
+    font-size: .9em;
+    color:#363949ec;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: -10px;
+   
+}
+.name .input-box.fname{
+    margin-right: 5px; 
+}
+.name .input-box.mname{
+    margin-right: 5px; 
+}
+
+.login .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #363949ec;
+    margin: 30px 0;
+}
+.register .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #363949ec;
+    margin: 10px 0;
+}
+
+
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color:#363949ec;
+    font-weight: 500;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top:5px;
+}
+ 
+
+
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border:none;
+    outline:none;
+    font-size: 1em;
+    color:#363949ec;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
+.input-box .icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color:#363949ec;
+    line-height: 57px;
+}
+.remember-forget{
+    font-size: .9em;
+    color:#363949ec;
+    font-weight: 500;
+    margin: -10px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.remember-forget label input{
+    accent-color: #363949ec;
+    margin-right: 3px;
+}
+.remember-forget a{
+    color: #363949ec;
+    text-decoration: none;
+}
+.remember-forget a:hover{
+    text-decoration: underline;
+}
+
+.btn{
+    margin-top: 5px;
+    width: 100%;
+    height: 45px;
+    background: #363949ec;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor:pointer;
+    font-size:1.1em;
+    color:white;
+    font-weight: 500;
+    transition: scale 0.3s ease;
+}
+
+.btn:active{
+    scale:0.95;
+}
+.login-register{
+    font-size: .9em;
+    color:#363949ec;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 20px ;   
+}
+.login-register p a {
+    color: #363949ec;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-register a:hover{
+    text-decoration: underline;
+}
+
+.gender-date{
+    color:#162938;
+    font-weight: 500;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #363949ec;
+
+}
+.gender-date .male{
+    margin-right: 5px;
+}
+input[type="date"]{
+    font-size: 17px;
+    background: transparent; 
+    border: none;
+    color: #363949ec;
+    margin-top: -5px;
+    margin-right: -145px;
+    z-index: 5;
+} 
+input[type="date"]::-webkit-calendar-picker-indicator{
+    opacity: 0;
+}
+.date-icon{
+    cursor: pointer;
+    font-size: 18px;
+    margin-right:8px;
+    color:#363949ec; 
+}
+
+
+.label-gender-date{
+    font-size: 1.1em;
+    color:#363949ec;
+    font-weight: 600;
+    margin-top:10px ;
+    margin-bottom: 2px;
+    margin-right:93px; 
+    display: flex;
+    justify-content: space-between;    
+}
+
+.form-box .label-error{
+    margin-top: -12px;
+    margin-bottom: 7px;
+    color:red;
+}
+
+.temrs-conditions{
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+input[type="checkbox"]{
+    margin-right: 10px;
+}
+
+
+
+@media (max-width:400px) {
+    .wrapper.active-register{
+        width:380px;
+    }   
+    .wrapper{
+        margin-top:100px;
+        margin-bottom:70px;
+        width:380px;
+        height:400px;
+    }
+}

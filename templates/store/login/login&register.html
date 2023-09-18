@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/login&register.css' %}">
+    <link rel="shortcut icon" href="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}"/>
+    <title>Login</title>
+</head>
+
+<body>
+    <header>
+        {% url 'home' as home %}
+        <div class="picture"><img src="{%static 'image/green-logo.png'%}" onclick="window.location.href='{{home}}'"></div>
+        <nav class="navigation">
+            <a href="{% url 'home'%}">Home</a>
+            <a href="{% url 'customerProducts' catg='all' %}">Products</a>
+            <a href="{% url 'aboutUs' %}">About US</a>
+            <!-- <button class="btnLogin" onclick="toLoginPage()">Login</button> -->
+            <span class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </span>
+        </nav>
+        <div class="dropdown-menu">
+            <li><a href="{% url 'home'%}">Home</a></li>
+            <li><a href="">Services</a></li>
+            <li><a href="{% url 'aboutUs' %}">About US</a></li>
+            <!-- <li><button class="btnLogin" onclick="toLoginPage()">Login</button></li> -->
+        </div>
+    </header>
+
+
+    <!-- login -->
+    
+    <div class="wrapper">
+        <!-- {% url 'login' as login %}
+        <span class="icon-closed" onclick="window.location.href='{{login}}'"><ion-icon name="close-outline"></ion-icon></span> -->
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="#" , method="post">
+                {% csrf_token %}
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" name="email" required>
+                    <label>Email</label>
+                    </span>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                    </span>
+                </div>
+                <div class="remember-forget">
+                    <label><input type="checkbox">Remember me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <div class="label-error">
+                    <label>{{error}}</label>
+                </div>
+                <button type="submit" class="btn" name="login" value="login">Login
+                </button>
+                <div class="login-register">
+                    <p>Don't have an account? <a href="#" class="register-link">Register</a></p>
+                    <input type="hidden" id="Id" name="Id" value= {{e}} >
+                </div>
+            </form>
+        </div>
+
+
+        <!-- register         -->
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form action="#" method="post">
+                {% csrf_token %}
+                <div class="name">
+                    <div class="input-box fname">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" name="First Name" required>
+                        <label>First Name</label>
+                    </div>
+                    <div class="input-box mname">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" name="Middle Name" required>
+                        <label>Middle Name</label>
+                    </div>
+                    <div class="input-box lname">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" name="Last Name" required>
+                        <label>Last Name</label>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="email" name="Email" required>
+                    <label>Email</label>
+
+                </div>
+                <div class="label-gender-date">
+                    <label class="label-gender">Gender</label>
+                    <label class="label-date">Date</label>
+                </div>
+                <div class="gender-date">
+                    <span>
+                        <label class="male"><input type="radio" value="Male" name="Gender">Male</label>
+                        <label><input type="radio" value="Female" name="Gender">Female</label>
+                    </span>
+                    <input type="date" name="Date">
+                    <span class="date-icon"><ion-icon name="calendar-number"></ion-icon></ion-icon></span>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" name="Password2" required minlength="8" maxlength="20">
+                    <label>Password</label>
+
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="call"></ion-icon></span>
+                    <input type="tel" name="Phone" required pattern="[0]{1}[1]{1}[0-9]{9}">
+                    <label>Phone</label>
+
+                </div>
+                <div class="input-box">
+                    <span class="icon"><i class="fa-solid fa-id-card"></i></ion-icon></span>
+                    <input type="tel" name="SSN" required pattern="\d{14}">
+                    <label>SSN</label>
+
+                </div>
+
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="home"></ion-icon></i></ion-icon></span>
+                    <input type="text" name="Address" required>
+                    <label>address</label>
+                </div>
+
+                <div class="tems-conditions">
+                    <label><input type="checkbox" name="Agreement">I agree to the terms & conditions</label>
+                    <span></span>
+                </div>
+                <div class="label-error">
+                    <label>{{error2}}</label>
+                </div>
+                <button type="submit" class="btn" name="register" value="register">Register</button>
+                
+                <div class="login-register">
+                    <p>Already have an account? <a href="#" class="login-link">Login</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js\login&register.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+        <!-- Footer -->
+<footer class="mt-5">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p>123 Main Street</p>
+            <p>City, State 12345</p>
+            <p>Phone: 123-456-7890</p>
+            <p>Email: info@pharmacy.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>&copy; 2023 Pharmacy. All rights reserved.</span>
+    </div>
+</footer>
+</body>
+
+</html>

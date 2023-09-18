@@ -1,0 +1,146 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <link rel="shortcut icon" href="{% static 'image/logo/dark-logo-pharmacy_Logo - Dark mode.png' %}"/>
+    <title>Cart</title>
+    <style>
+        *{
+            font-family: poppins;
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+    <header>
+        <div class="picture"><img src="{% static 'image/green-logo.png' %}"></div>
+        <div class="page-name"> </div>
+        <nav class="navigation">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'customerProducts' catg='all' %}">Products</a>
+            <a href="{% url 'aboutUs' %}">About US</a>
+            <span class="toggle_btn">
+                <i class="fa-solid fa-bars"></i>
+            </span>
+        </nav>
+        <div class="dropdown-menu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'customerProducts' catg='all' %}">Products</a></li>
+            <li><a href="{% url 'aboutUs' %}">About US</a></li>
+        </div>
+    </header>
+
+
+    <div class="wrapper">
+        <!-- <h1>Your Cart</h1> -->
+        <div class="project">
+            <div class="shop">
+                <div class="box">
+                    <a href=""> <img src="{% static 'image/antibiotic-tablets.jpg' %}" alt="">
+                    </a>
+                    <div class="content">
+                        <h3>Antabiotic</h3>
+                        <h4>Price: 40 &pound;</h4>
+                        <p class="unit">Qunantity: <input value="1"></p>
+                        <p class="btn-remove-area" style="border-radius: 20px;">
+                            <i class="fa fa-trash"></i>
+                            <span class="btn-remove">Remove</span>
+                        </p>
+                    </div>
+                </div>
+                {% comment %} <div class="box">
+                    <img src="https://img.freepik.com/free-vector/fake-drugs-carton-package-box_1441-4154.jpg?w=900&t=st=1687260470~exp=1687261070~hmac=5c7a3e20bf9c8db24e04543e9a8d8bc027908d497566fc98d73792595c8a349f"
+                        alt="">
+                    <div class="content">
+                        <h3>Antabiotic22</h3>
+                        <h4>Price: 200 &pound;</h4>
+                        <p class="unit">Qunantity: <input value="1"></p>
+                        <p class="btn-remove-area">
+                            <i class="fa fa-trash"></i>
+                            <span class="btn-remove">Remove</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="box">
+                    <img src="https://img.freepik.com/free-psd/blank-box-with-drugs-blister_250435-494.jpg?size=626&ext=jpg&ga=GA1.1.4560531.1686925108&semt=ais"
+                        alt="">
+                    <div class="content">
+                        <h3>Antabiotic33</h3>
+                        <h4>Price: 50 &pound;</h4>
+                        <p class="unit">Qunantity: <input value="0"></p>
+                        <p class="btn-remove-area">
+                            <i class="fa fa-trash"></i>
+                            <button class="btn-remove">Remove</span>
+                        </p>
+                    </div>
+                </div> {% endcomment %}
+            </div>
+            <div class="right-bar">
+                <p><span>Subtotal</span> <span> 40 &pound</span></p>
+                <hr>
+                <p><span>Tax (5%)</span> <span>2 &pound</span></p>
+                <hr>
+                <p><span>Shipping</span> <span> 10 &pound</span></p>
+                <hr>
+                <p><span>Total</span> <span> 52 &pound</span></p>
+                <hr>
+                <a href="{% url 'order' %}" style="border-radius: 15px;"><i class="fa fa-shopping-cart" ></i> Order </a>
+            </div>
+        </div>
+    </div>
+
+{% url 'login' as login %}
+            <!-- <button class="btnLogin" onclick=window.location.href="login">Login</button> -->
+
+    <script src="{% static 'js/cart.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>123 Main Street</p>
+                <p>City, State 12345</p>
+                <p>Phone: 123-456-7890</p>
+                <p>Email: info@pharmacy.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'customerProducts' catg='all' %}">Products</a></li>
+                    <li><a href="{% url 'aboutUs' %}">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2023 Pharmacy. All rights reserved.</span>
+        </div>
+    </footer>
+
+</body>
+
+
+
+</html>
