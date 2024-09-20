@@ -70,3 +70,59 @@ The pharmacy website project encompasses both the shop application, catering to 
 13. it will open vs code and in its terminal type "pip install django-bootstrap-v5" then "py manage.py makemigrations" then "py manage.py migrate" then "py manage.py collectstatic" and finally "py manage.py runserver"
 14. copy the output link and type it in your browser : its our home page of shop application
 15. type "the copied link/admin" and it will open the managment system
+
+## Contributors:
+<table>
+  <tr>
+<td align="center">
+    <a href="https://github.com/AbdulrahmanGhitani" target="_black">
+    <img src="https://avatars.githubusercontent.com/u/114954706?v=4" width="150px;" alt="Abdulrahman Shawky"/>
+    <br />
+    <sub><b>Abdulrahman Shawky</b></sub></a>
+</td>
+<td align="center">
+    <a href="https://github.com/omarnasser0" target="_black">
+    <img src="https://avatars.githubusercontent.com/u/100535160?v=4" width="150px;" alt="omarnasser0"/>
+    <br />
+    <sub><b>Omar Abdulnasser</b></sub></a>
+</td>
+<td align="center">
+    <a href="https://github.com/AhmedKamalMohammedElSayed" target="_black">
+    <img src="https://avatars.githubusercontent.com/u/96977876?v=4" width="150px;" alt="Ahmed Kamal"/>
+    <br />
+    <sub><b>Ahmed Kamal</b></sub></a>
+</td>
+       <td align="center">
+      <a href="https://github.com/Mahmoudm007" target="_black">
+        <img
+          src="https://avatars.githubusercontent.com/u/101353088?v=4"
+          width="150px;"
+          alt="Mahmoud Mohamed"
+        />
+        <br />
+        <sub><b>Mahmoud Mohamed</b></sub></a
+      >
+    </td>
+    <td align="center">
+      <a href="https://github.com/zoz-hf" target="_black">
+        <img
+          src="https://avatars.githubusercontent.com/u/99608059?v=4"
+          width="150px;"
+          alt="Ziyad ElFayoumy"
+        />
+        <br />
+        <sub><b>Ziyad ElFayoumy</b></sub></a>
+    </td>
+        <td align="center">
+      <a href="https://github.com/amg-eng" target="_black">
+        <img
+          src="https://avatars.githubusercontent.com/u/101107538?v=4"
+          width="150px;"
+          alt="Amgad Atef"
+        />
+        <br />
+        <sub><b>Amgad Atef</b></sub></a>
+    </td>
+    
+  </tr>
+ </table>
