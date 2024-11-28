@@ -104,7 +104,7 @@ The pharmacy website project encompasses both the shop application, catering to 
       >
     </td>
     <td align="center">
-      <a href="https://github.com/zoz-hf" target="_black">
+      <a href="https://github.com/Ziyad-HF" target="_black">
         <img
           src="https://avatars.githubusercontent.com/u/99608059?v=4"
           width="150px;"
